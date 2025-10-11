@@ -1,14 +1,14 @@
 # Vercel redirects for TaskFlow Pro
 
-# Root redirect to landing page
-/  /landing.html  200
+# Root redirect to main page
+/  /index.html  200
 
 # App shortcuts
 /app  /app.html  200
 /clear-demo-data  /clear-demo-data.html  200
 
-# API routes (if any)
+# API routes (serverless functions)
 /api/*  /api/:splat  200
 
 # Fallback for SPA routing
-/*  /landing.html  200
+/*  /index.html  200

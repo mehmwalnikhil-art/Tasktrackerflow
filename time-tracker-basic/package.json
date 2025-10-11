@@ -2,11 +2,9 @@
   "name": "taskflow-pro",
   "version": "1.0.0",
   "description": "AI-Powered Task Management with OpenAI Translation",
-  "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js",
-    "serve": "node server.js"
+    "dev": "vercel dev",
+    "build": "echo 'No build step required for static deployment'"
   },
   "keywords": [
     "task-management",
@@ -19,7 +17,7 @@
   "author": "TaskFlow Team",
   "license": "MIT",
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=16.0.0"
   },
   "repository": {
     "type": "git",

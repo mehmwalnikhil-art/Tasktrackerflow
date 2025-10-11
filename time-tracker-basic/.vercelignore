@@ -65,13 +65,10 @@ Thumbs.db
 *.tmp
 *.temp
 
-# Build outputs (if any)
-dist/
-build/
-
-# Local server files
-server.js
-start.sh
+# Deployment scripts (not needed with proper Vercel config)
+deploy-vercel.sh
+emergency-deploy.sh
+fix-vercel-404.sh
 
 # Documentation that's not needed for deployment
 README.md
