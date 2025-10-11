@@ -6,379 +6,244 @@
   <title>TaskFlow Pro - AI-Powered Task Management</title>
   <meta name="description" content="Transform your productivity with TaskFlow Pro - the ultimate AI-powered task management and time tracking application.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%236366f1'/><path d='M16 8L22 14L16 20L10 14L16 8Z' fill='white'/></svg>">
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <meta name="theme-color" content="#6366f1" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --primary: #6366f1;
-      --primary-dark: #4f46e5;
-      --primary-light: #818cf8;
-      --secondary: #8b5cf6;
-      --success: #10b981;
-      --warning: #f59e0b;
-      --danger: #ef4444;
-      --bg: #f8fafc;
-      --bg-secondary: #f1f5f9;
-      --surface: #ffffff;
-      --text: #0f172a;
-      --text-secondary: #64748b;
-      --text-muted: #94a3b8;
-      --border: #e2e8f0;
-      --radius: 8px;
-      --radius-lg: 12px;
-      --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      line-height: 1.6;
-      color: var(--text);
-      background: var(--bg);
-    }
-
-    .hero {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-      color: white;
-      padding: 80px 20px;
-      text-align: center;
-      min-height: 100vh;
+    /* Include critical styles for initial load */
+    .app-loading {
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
+      height: 100vh;
+      font-family: Inter, sans-serif;
     }
-
-    .hero-title {
-      font-size: 3.5rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      background: linear-gradient(45deg, #ffffff, #e0e7ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-subtitle {
-      font-size: 1.25rem;
-      margin-bottom: 2rem;
-      opacity: 0.9;
-      max-width: 600px;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 3rem;
-    }
-
-    .btn {
-      padding: 12px 24px;
-      border-radius: var(--radius);
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.2s ease;
-      border: 2px solid transparent;
-      display: inline-block;
-    }
-
-    .btn-primary {
-      background: white;
-      color: var(--primary);
-    }
-
-    .btn-primary:hover {
-      background: var(--bg);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: white;
-      border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: white;
-    }
-
-    .hero-demo {
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    .demo-task {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border-radius: var(--radius-lg);
-      padding: 1rem;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      text-align: left;
-    }
-
-    .demo-task-icon {
-      font-size: 1.5rem;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: var(--radius);
-    }
-
-    .demo-task-content {
-      flex: 1;
-    }
-
-    .demo-task-title {
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-
-    .demo-task-desc {
-      font-size: 0.875rem;
-      opacity: 0.8;
-    }
-
-    .demo-task-priority {
-      padding: 0.25rem 0.5rem;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-
-    .priority-high {
-      background: var(--danger);
-      color: white;
-    }
-
-    .priority-medium {
-      background: var(--warning);
-      color: white;
-    }
-
-    .features {
-      padding: 80px 20px;
-      background: var(--surface);
-    }
-
-    .features-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .features-title {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: var(--text);
-    }
-
-    .features-subtitle {
-      font-size: 1.125rem;
-      color: var(--text-secondary);
-      margin-bottom: 3rem;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-top: 3rem;
-    }
-
-    .feature-card {
-      background: var(--bg);
-      padding: 2rem;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      transition: all 0.2s ease;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .feature-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-
-    .feature-title {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: var(--text);
-    }
-
-    .feature-desc {
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    .cta {
-      background: var(--bg-secondary);
-      padding: 80px 20px;
-      text-align: center;
-    }
-
-    .cta-container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .cta-title {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: var(--text);
-    }
-
-    .cta-subtitle {
-      font-size: 1.125rem;
-      color: var(--text-secondary);
-      margin-bottom: 2rem;
-    }
-
-    @media (max-width: 768px) {
-      .hero-title {
-        font-size: 2.5rem;
-      }
-      
-      .hero-cta {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .btn {
-        width: 200px;
-      }
-      
-      .features-title,
-      .cta-title {
-        font-size: 2rem;
-      }
-    }
+    .hidden { display: none !important; }
   </style>
 </head>
 <body>
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-container">
-      <h1 class="hero-title">Transform Your Productivity</h1>
-      <p class="hero-subtitle">
-        The ultimate AI-powered task management and time tracking application. 
-        Create, organize, and track your tasks with intelligent automation.
-      </p>
-      <div class="hero-cta">
-        <a href="app.html" class="btn btn-primary">Start Free Trial</a>
-        <a href="#demo" class="btn btn-secondary">Watch Demo</a>
-      </div>
-      <div class="hero-demo" id="demo">
-        <div class="demo-task">
-          <div class="demo-task-icon">📧</div>
-          <div class="demo-task-content">
-            <div class="demo-task-title">Email to John about project update</div>
-            <div class="demo-task-desc">Regarding: Q4 deliverables and timeline</div>
+  <!-- Landing Page Content (shown initially) -->
+  <div id="landing-view">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-container">
+        <h1 class="hero-title">Transform Your Productivity</h1>
+        <p class="hero-subtitle">
+          The ultimate AI-powered task management and time tracking application.
+          Create, organize, and track your tasks with intelligent automation.
+        </p>
+        <div class="hero-cta">
+          <button onclick="loadApp()" class="btn btn-primary">Start Free Trial</button>
+          <a href="#demo" class="btn btn-secondary">Watch Demo</a>
+        </div>
+        <div class="hero-demo" id="demo">
+          <div class="demo-task">
+            <div class="demo-task-icon">📧</div>
+            <div class="demo-task-content">
+              <div class="demo-task-title">Email to John about project update</div>
+              <div class="demo-task-desc">Regarding: Q4 deliverables and timeline</div>
+            </div>
+            <div class="demo-task-priority priority-high">HIGH</div>
           </div>
-          <div class="demo-task-priority priority-high">HIGH</div>
-        </div>
-        <div class="demo-task">
-          <div class="demo-task-icon">🤝</div>
-          <div class="demo-task-content">
-            <div class="demo-task-title">Team standup meeting</div>
-            <div class="demo-task-desc">Daily sync at 9:00 AM</div>
+          <div class="demo-task">
+            <div class="demo-task-icon">🤝</div>
+            <div class="demo-task-content">
+              <div class="demo-task-title">Team standup meeting</div>
+              <div class="demo-task-desc">Daily sync at 9:00 AM</div>
+            </div>
+            <div class="demo-task-priority priority-medium">MED</div>
           </div>
-          <div class="demo-task-priority priority-medium">MED</div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Features Section -->
-  <section class="features">
-    <div class="features-container">
-      <h2 class="features-title">Powerful Features</h2>
-      <p class="features-subtitle">
-        Everything you need to manage tasks, track time, and boost productivity with AI assistance.
-      </p>
-      
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🤖</div>
-          <h3 class="feature-title">AI Task Enhancement</h3>
-          <p class="feature-desc">
-            Automatically improve task descriptions, extract actionable items, and get intelligent suggestions powered by OpenAI.
-          </p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">⏱️</div>
-          <h3 class="feature-title">Time Tracking</h3>
-          <p class="feature-desc">
-            Track time spent on tasks with precision. Get detailed analytics and insights into your productivity patterns.
-          </p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🌍</div>
-          <h3 class="feature-title">AI Translation</h3>
-          <p class="feature-desc">
-            Translate tasks and documents to 20+ languages using advanced AI. Perfect for international teams and projects.
-          </p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">📄</div>
-          <h3 class="feature-title">Document Processing</h3>
-          <p class="feature-desc">
-            Upload documents, extract text with OCR, translate content, and automatically create tasks from document analysis.
-          </p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">📅</div>
-          <h3 class="feature-title">Calendar Integration</h3>
-          <p class="feature-desc">
-            AI generates smart calendar events automatically. Optional Google Calendar integration for real sync.
-          </p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">📊</div>
-          <h3 class="feature-title">Analytics & Insights</h3>
-          <p class="feature-desc">
-            Get detailed reports on your productivity, time allocation, and task completion patterns with beautiful charts.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- Features Section -->
+    <section class="features">
+      <div class="features-container">
+        <h2 class="features-title">Powerful Features</h2>
+        <p class="features-subtitle">
+          Everything you need to manage tasks, track time, and boost productivity with AI assistance.
+        </p>
 
-  <!-- CTA Section -->
-  <section class="cta">
-    <div class="cta-container">
-      <h2 class="cta-title">Ready to Boost Your Productivity?</h2>
-      <p class="cta-subtitle">
-        Join thousands of professionals who have transformed their workflow with TaskFlow Pro's AI-powered features.
-      </p>
-      <div class="hero-cta">
-        <a href="app.html" class="btn btn-primary">Get Started Free</a>
-        <a href="clear-demo-data.html" class="btn btn-secondary">Clear Demo Data</a>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🤖</div>
+            <h3 class="feature-title">AI Task Enhancement</h3>
+            <p class="feature-desc">
+              Automatically improve task descriptions, extract actionable items, and get intelligent suggestions powered by OpenAI.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">⏱️</div>
+            <h3 class="feature-title">Time Tracking</h3>
+            <p class="feature-desc">
+              Track time spent on tasks with precision. Get detailed analytics and insights into your productivity patterns.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🌍</div>
+            <h3 class="feature-title">AI Translation</h3>
+            <p class="feature-desc">
+              Translate tasks and documents to 20+ languages using advanced AI. Perfect for international teams and projects.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📄</div>
+            <h3 class="feature-title">Document Processing</h3>
+            <p class="feature-desc">
+              Upload documents, extract text with OCR, translate content, and automatically create tasks from document analysis.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📅</div>
+            <h3 class="feature-title">Calendar Integration</h3>
+            <p class="feature-desc">
+              AI generates smart calendar events automatically. Optional Google Calendar integration for real sync.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3 class="feature-title">Analytics & Insights</h3>
+            <p class="feature-desc">
+              Get detailed reports on your productivity, time allocation, and task completion patterns with beautiful charts.
+            </p>
+          </div>
+        </div>
       </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+      <div class="cta-container">
+        <h2 class="cta-title">Ready to Boost Your Productivity?</h2>
+        <p class="cta-subtitle">
+          Join thousands of professionals who have transformed their workflow with TaskFlow Pro's AI-powered features.
+        </p>
+        <div class="hero-cta">
+          <button onclick="loadApp()" class="btn btn-primary">Get Started Free</button>
+          <button onclick="clearDemoData()" class="btn btn-secondary">Clear Demo Data</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Main App (loaded dynamically) -->
+  <div id="app-view" class="hidden">
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div class="logo">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+            <path d="M16 8L22 14L16 20L10 14L16 8Z" fill="white"/>
+            <defs>
+              <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+                <stop offset="0%" stop-color="#6366f1"/>
+                <stop offset="100%" stop-color="#8b5cf6"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="logo-text">TaskFlow Pro</span>
+        </div>
+
+        <nav class="sidebar-nav">
+          <button class="nav-item active" data-view="tasks" onclick="switchView('tasks')">
+            <span class="nav-icon">📋</span>
+            <span>My Tasks</span>
+          </button>
+          <button class="nav-item" data-view="calendar" onclick="switchView('calendar')">
+            <span class="nav-icon">📅</span>
+            <span>Calendar</span>
+          </button>
+          <button class="nav-item" data-view="documents" onclick="switchView('documents')">
+            <span class="nav-icon">📄</span>
+            <span>Documents</span>
+          </button>
+          <button class="nav-item" data-view="analytics" onclick="switchView('analytics')">
+            <span class="nav-icon">📊</span>
+            <span>Analytics</span>
+          </button>
+          <button class="nav-item" data-view="settings" onclick="switchView('settings')">
+            <span class="nav-icon">⚙️</span>
+            <span>Settings</span>
+          </button>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <div id="view-container">
+          <!-- Views will be loaded here -->
+        </div>
+      </main>
     </div>
-  </section>
+  </div>
+
+  <!-- Loading indicator -->
+  <div id="loading" class="hidden app-loading">
+    <div>Loading TaskFlow Pro...</div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="./api-integrations.js"></script>
+  <script src="./app.js"></script>
+  <script src="./auth.js"></script>
+  <script>
+    // Simple SPA routing
+    function loadApp() {
+      document.getElementById('landing-view').classList.add('hidden');
+      document.getElementById('app-view').classList.remove('hidden');
+      // Initialize the app
+      if (window.TaskFlowApp) {
+        window.TaskFlowApp.init();
+      }
+    }
+
+    function clearDemoData() {
+      if (confirm('Clear all demo data? This action cannot be undone.')) {
+        localStorage.clear();
+        location.reload();
+      }
+    }
+
+    function switchView(view) {
+      // Update active navigation
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      document.querySelector(`[data-view="${view}"]`).classList.add('active');
+
+      // Load view content (simplified for demo)
+      const container = document.getElementById('view-container');
+      switch(view) {
+        case 'tasks':
+          container.innerHTML = '<div class="view-header"><h1>My Tasks</h1></div><div class="tasks-container">Task management interface would load here...</div>';
+          break;
+        case 'calendar':
+          container.innerHTML = '<div class="view-header"><h1>Calendar</h1></div><div class="calendar-container">Calendar interface would load here...</div>';
+          break;
+        case 'documents':
+          container.innerHTML = '<div class="view-header"><h1>Documents</h1></div><div class="documents-container">Document processing interface would load here...</div>';
+          break;
+        case 'analytics':
+          container.innerHTML = '<div class="view-header"><h1>Analytics</h1></div><div class="analytics-container">Analytics dashboard would load here...</div>';
+          break;
+        case 'settings':
+          container.innerHTML = '<div class="view-header"><h1>Settings</h1></div><div class="settings-container">Settings panel would load here...</div>';
+          break;
+      }
+    }
+
+    // Handle browser back/forward navigation
+    window.addEventListener('popstate', function(event) {
+      // Handle navigation state if needed
+    });
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('TaskFlow Pro loaded');
+    });
+  </script>
 </body>
 </html>
