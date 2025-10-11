@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TaskFlow Pro - AI-Powered Task & Time Management</title>
+  <meta name="description" content="World-class task management with AI-powered parsing and time tracking" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <meta name="theme-color" content="#6366f1" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="logo">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+          <path d="M16 8L22 14L16 20L10 14L16 8Z" fill="white"/>
+          <defs>
+            <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+              <stop offset="0%" stop-color="#6366f1"/>
+              <stop offset="100%" stop-color="#8b5cf6"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="logo-text">TaskFlow Pro</span>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-view="tasks">
+          <span class="nav-icon">📋</span>
+          <span>My Tasks</span>
+        </button>
+        <button class="nav-item" data-view="calendar">
+          <span class="nav-icon">📅</span>
+          <span>Calendar</span>
+        </button>
+        <button class="nav-item" data-view="documents">
+          <span class="nav-icon">📄</span>
+          <span>Documents</span>
+        </button>
+        <button class="nav-item" data-view="analytics">
+          <span class="nav-icon">📊</span>
+          <span>Analytics</span>
+        </button>
+        <button class="nav-item" data-view="teams">
+          <span class="nav-icon">👥</span>
+          <span>Teams</span>
+        </button>
+        <button class="nav-item" data-view="settings">
+          <span class="nav-icon">⚙️</span>
+          <span>Settings</span>
+        </button>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <a href="landing.html" class="sidebar-btn" style="text-decoration: none; color: inherit;">
+          <span>🏠</span> Landing Page
+        </a>
+        <button id="upgradeBtn" class="sidebar-btn premium">
+          <span>⭐</span> Upgrade to Pro
+        </button>
+        <button id="exportCsvBtn" class="sidebar-btn">
+          <span>📥</span> Export Data
+        </button>
+        <button id="clearDataBtn" class="sidebar-btn danger">
+          <span>🗑️</span> Clear All
+        </button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="page-header">
+        <div class="header-left">
+          <h1 class="page-title">My Tasks</h1>
+          <div class="header-stats">
+            <div class="stat-badge">
+              <span class="stat-label">Active</span>
+              <span id="activeCount" class="stat-value">0</span>
+            </div>
+            <div class="stat-badge">
+              <span class="stat-label">Completed</span>
+              <span id="completedCount" class="stat-value">0</span>
+            </div>
+            <div class="stat-badge">
+              <span class="stat-label">Time Today</span>
+              <span id="todayTime" class="stat-value">0h 0m</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="quick-add">
+        <div class="quick-add-card">
+          <div class="ai-badge">✨ AI-Powered</div>
+          <textarea 
+            id="taskInput" 
+            placeholder="Just describe your task... AI will create heading and description automatically. e.g., 'Write an email to PwC for preparation of TP documentation, add details as to fee, deadline etc.'"
+            rows="2"
+          ></textarea>
+          <div class="quick-add-footer">
+            <input id="taskDeadlineInput" type="datetime-local" class="deadline-input" placeholder="Deadline (optional)" />
+            <select id="taskPriorityInput" class="priority-select">
+              <option value="medium">Medium Priority</option>
+              <option value="high">High Priority</option>
+              <option value="low">Low Priority</option>
+            </select>
+            <button id="addTaskBtn" class="btn-primary">
+              <span>✨</span> Create Task
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="tasks-section">
+        <div class="tabs">
+          <button id="activeTab" class="tab-btn active">
+            <span class="tab-icon">⚡</span> Active
+          </button>
+          <button id="completedTab" class="tab-btn">
+            <span class="tab-icon">✓</span> Completed
+          </button>
+        </div>
+
+        <div id="emptyState" class="empty-state">
+          <div class="empty-icon">📝</div>
+          <h3>No tasks yet</h3>
+          <p>Create your first task using the AI-powered input above</p>
+        </div>
+
+        <div id="taskList" class="task-grid"></div>
+      </section>
+
+      <div id="activeTaskPanel" class="active-task-panel hidden">
+        <div class="panel-content">
+          <div class="panel-header">
+            <span class="panel-title">Currently Working On</span>
+            <button id="closePanel" class="btn-icon">✕</button>
+          </div>
+          <div id="activeTaskInfo" class="active-task-info"></div>
+          <div class="panel-timer">
+            <div class="timer-display" id="panelTimer">00:00:00</div>
+            <button id="stopActiveTask" class="btn-stop">Stop Timer</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="./auth.js"></script>
+  <script src="./payment.js"></script>
+  <script src="./api-integrations.js"></script>
+  <script src="./app.js"></script>
+  <script>
+    // Initialize authentication first
+    if (TaskFlowAuth.init()) {
+      // User is authenticated, app will load normally
+      console.log('User authenticated:', TaskFlowAuth.getCurrentUser());
+      
+      // Initialize payment system
+      TaskFlowPayment.init();
+    }
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(console.warn);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear Demo Data - TaskFlow Pro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f8fafc;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .btn {
+            background: #6366f1;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+        .btn:hover {
+            background: #4f46e5;
+        }
+        .btn-danger {
+            background: #ef4444;
+        }
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+        .success {
+            color: #10b981;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧹 Clear Demo Data</h1>
+        <p>This will clear all demo data including the "Nikhil Mehmwal" profile and reset the app to a fresh state.</p>
+        
+        <div id="status"></div>
+        
+        <button class="btn btn-danger" onclick="clearAllData()">Clear All Demo Data</button>
+        <button class="btn" onclick="goToApp()">Go to Clean App</button>
+        
+        <hr style="margin: 30px 0;">
+        
+        <h3>What gets cleared:</h3>
+        <ul style="text-align: left; max-width: 400px; margin: 0 auto;">
+            <li>✅ User accounts and profiles</li>
+            <li>✅ All tasks and time tracking data</li>
+            <li>✅ API keys and settings</li>
+            <li>✅ Teams and invitations</li>
+            <li>✅ All localStorage data</li>
+        </ul>
+    </div>
+
+    <script>
+        function clearAllData() {
+            try {
+                // Clear all TaskFlow related localStorage
+                const keysToRemove = [];
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key && (key.startsWith('taskflow') || key.startsWith('TaskFlow'))) {
+                        keysToRemove.push(key);
+                    }
+                }
+                
+                keysToRemove.forEach(key => localStorage.removeItem(key));
+                
+                // Also clear common keys
+                localStorage.removeItem('taskflow:auth');
+                localStorage.removeItem('taskflow:users');
+                localStorage.removeItem('taskflow:teams');
+                localStorage.removeItem('taskflow:invitations');
+                localStorage.removeItem('taskflow_openai_api_key');
+                localStorage.removeItem('taskflow_translate_api_key');
+                localStorage.removeItem('taskflow_calendar_api_key');
+                localStorage.removeItem('taskflow_calendar_client_id');
+                localStorage.removeItem('taskflow_ocr_api_key');
+                
+                document.getElementById('status').innerHTML = '<p class="success">✅ All demo data cleared successfully!</p>';
+                
+                setTimeout(() => {
+                    window.location.href = 'landing.html';
+                }, 2000);
+                
+            } catch (error) {
+                document.getElementById('status').innerHTML = '<p style="color: red;">❌ Error: ' + error.message + '</p>';
+            }
+        }
+        
+        function goToApp() {
+            window.location.href = 'app.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{
+  "name": "taskflow-pro",
+  "version": "1.0.0",
+  "description": "AI-Powered Task Management with OpenAI Translation",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "serve": "node server.js"
+  },
+  "keywords": [
+    "task-management",
+    "ai",
+    "openai",
+    "translation",
+    "productivity",
+    "time-tracking"
+  ],
+  "author": "TaskFlow Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/taskflow-pro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/taskflow-pro/issues"
+  },
+  "homepage": "https://github.com/your-username/taskflow-pro#readme"
+}
