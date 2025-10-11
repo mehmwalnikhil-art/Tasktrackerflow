@@ -1,5 +1,5 @@
 {
   "rewrites": [
-    { "source": "/(.*)", "destination": "/time-tracker-basic/index.html" }
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
