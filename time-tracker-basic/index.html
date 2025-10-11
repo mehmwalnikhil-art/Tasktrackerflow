@@ -190,20 +190,26 @@
   <script src="./app.js"></script>
   <script src="./auth.js"></script>
   <script>
-    // Simple SPA routing
+    // SPA State Management
+    let currentView = 'landing';
+
     function loadApp() {
-      document.getElementById('landing-view').classList.add('hidden');
-      document.getElementById('app-view').classList.remove('hidden');
-      // Initialize the app
-      if (window.TaskFlowApp) {
-        window.TaskFlowApp.init();
-      }
+      currentView = 'app';
+      showView('app');
+      // Initialize the main application
+      initializeTaskFlowApp();
     }
 
-    function clearDemoData() {
-      if (confirm('Clear all demo data? This action cannot be undone.')) {
-        localStorage.clear();
-        location.reload();
+    function showView(viewName) {
+      // Hide all views
+      document.getElementById('landing-view').classList.add('hidden');
+      document.getElementById('app-view').classList.add('hidden');
+
+      // Show selected view
+      if (viewName === 'app') {
+        document.getElementById('app-view').classList.remove('hidden');
+      } else {
+        document.getElementById('landing-view').classList.remove('hidden');
       }
     }
 
@@ -214,35 +220,51 @@
       });
       document.querySelector(`[data-view="${view}"]`).classList.add('active');
 
-      // Load view content (simplified for demo)
+      // Load view content
       const container = document.getElementById('view-container');
+      container.innerHTML = getViewContent(view);
+    }
+
+    function getViewContent(view) {
       switch(view) {
         case 'tasks':
-          container.innerHTML = '<div class="view-header"><h1>My Tasks</h1></div><div class="tasks-container">Task management interface would load here...</div>';
-          break;
+          return '<div class="view-header"><h1>My Tasks</h1><p>Task management interface loading...</p></div>';
         case 'calendar':
-          container.innerHTML = '<div class="view-header"><h1>Calendar</h1></div><div class="calendar-container">Calendar interface would load here...</div>';
-          break;
+          return '<div class="view-header"><h1>Calendar</h1><p>Calendar interface loading...</p></div>';
         case 'documents':
-          container.innerHTML = '<div class="view-header"><h1>Documents</h1></div><div class="documents-container">Document processing interface would load here...</div>';
-          break;
+          return '<div class="view-header"><h1>Documents</h1><p>Document processing loading...</p></div>';
         case 'analytics':
-          container.innerHTML = '<div class="view-header"><h1>Analytics</h1></div><div class="analytics-container">Analytics dashboard would load here...</div>';
-          break;
+          return '<div class="view-header"><h1>Analytics</h1><p>Analytics dashboard loading...</p></div>';
         case 'settings':
-          container.innerHTML = '<div class="view-header"><h1>Settings</h1></div><div class="settings-container">Settings panel would load here...</div>';
-          break;
+          return '<div class="view-header"><h1>Settings</h1><p>Settings panel loading...</p></div>';
+        default:
+          return '<div class="view-header"><h1>TaskFlow Pro</h1><p>Select a view from the sidebar</p></div>';
       }
     }
 
-    // Handle browser back/forward navigation
+    function clearDemoData() {
+      if (confirm('Clear all demo data? This action cannot be undone.')) {
+        localStorage.clear();
+        location.reload();
+      }
+    }
+
+    function initializeTaskFlowApp() {
+      // Initialize your main app here
+      console.log('TaskFlow Pro initialized');
+
+      // Load default view
+      switchView('tasks');
+    }
+
+    // Handle browser navigation
     window.addEventListener('popstate', function(event) {
-      // Handle navigation state if needed
+      // Handle back/forward navigation if needed
     });
 
     // Initialize on load
     document.addEventListener('DOMContentLoaded', function() {
-      console.log('TaskFlow Pro loaded');
+      console.log('TaskFlow Pro DOM loaded');
     });
   </script>
 </body>
