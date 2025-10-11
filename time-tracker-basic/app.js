@@ -217,7 +217,7 @@
     match = text.match(/^(?:urgent|priority|asap|important)\s*[:\-]?\s*(.+)$/i);
     if (match) {
       console.log('✅ Matched: Priority pattern');
-      return {
+    return {
         name: `🚨 ${capitalizeFirst(match[1].trim())}`,
         description: 'High priority task',
         priority: 'high'
@@ -1129,7 +1129,7 @@
         task.sessions.map(s => `${new Date(s.start).toLocaleString()} (${formatDurationShort(s.end ? s.end - s.start : Date.now() - s.start)})`).join('; ') : 
         `${sessionCount} sessions`;
 
-      rows.push([
+        rows.push([
         task.name,
         task.description || '',
         task.completed ? 'Completed' : 'Active',
@@ -1372,7 +1372,7 @@
               <h3 class="card-title">Document Upload</h3>
               <div class="card-icon primary">📎</div>
             </div>
-            <div class="upload-area" id="uploadArea">
+          <div class="upload-area" id="uploadArea">
               <div class="upload-icon">📄</div>
               <h3>Drop files here or click to browse</h3>
               <p>Supports PDF, Word, Text, and Image files</p>
@@ -1400,9 +1400,9 @@
               </button>
             </div>
           </div>
-        </div>
-        
-        <div id="documentResult" class="document-result" style="display: none;">
+          </div>
+          
+          <div id="documentResult" class="document-result" style="display: none;">
           <div class="analytics-card">
             <div class="card-header">
               <h3 class="card-title">Document Analysis</h3>
@@ -1421,8 +1421,8 @@
               
               <div style="margin-top: 16px;">
                 <label style="font-weight: 600; margin-right: 12px;">Translate to:</label>
-                <select id="translateLang" class="translate-select">
-                  <option value="">Select language...</option>
+              <select id="translateLang" class="translate-select">
+                <option value="">Select language...</option>
                   <option value="es">🇪🇸 Spanish</option>
                   <option value="fr">🇫🇷 French</option>
                   <option value="de">🇩🇪 German</option>
@@ -1432,7 +1432,7 @@
                   <option value="ko">🇰🇷 Korean</option>
                   <option value="ar">🇸🇦 Arabic</option>
                   <option value="pt">🇵🇹 Portuguese</option>
-                </select>
+              </select>
               </div>
             </div>
             
@@ -1500,12 +1500,12 @@
               
               <p style="margin-top: 16px;"><strong>🔧 Integration Ready:</strong></p>
               <ul style="margin: 12px 0; padding-left: 20px;">
-                <li>PDF.js for PDF parsing</li>
-                <li>Mammoth.js for Word documents</li>
+            <li>PDF.js for PDF parsing</li>
+            <li>Mammoth.js for Word documents</li>
                 <li>OpenAI API for AI processing</li>
                 <li>OpenAI API for AI translation</li>
                 <li>OCR for image text extraction</li>
-              </ul>
+          </ul>
             </div>
           </div>
         </div>
