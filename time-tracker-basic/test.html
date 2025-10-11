@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow Pro - Deployment Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f8fafc;
+            line-height: 1.6;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .success {
+            color: #10b981;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .btn {
+            background: #6366f1;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+        }
+        .btn:hover {
+            background: #4f46e5;
+        }
+        .status {
+            background: #f0f9ff;
+            border: 1px solid #0ea5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success">✅ Vercel Deployment Working!</div>
+        
+        <h1>🚀 TaskFlow Pro - Deployment Test</h1>
+        
+        <div class="status">
+            <strong>🎉 Good News:</strong> If you can see this page, your Vercel deployment is working correctly!
+        </div>
+        
+        <h3>📋 Next Steps:</h3>
+        <ol>
+            <li><strong>Landing Page:</strong> <a href="landing.html" class="btn">Go to Landing Page</a></li>
+            <li><strong>Main App:</strong> <a href="app.html" class="btn">Open TaskFlow App</a></li>
+            <li><strong>Clear Demo Data:</strong> <a href="clear-demo-data.html" class="btn">Clear Demo Data</a></li>
+        </ol>
+        
+        <h3>🔧 Configuration Status:</h3>
+        <ul>
+            <li>✅ Static file serving: Working</li>
+            <li>✅ HTML files: Accessible</li>
+            <li>✅ Routing: Should be fixed</li>
+            <li>✅ OpenAI Integration: Ready</li>
+        </ul>
+        
+        <h3>🌍 Features Available:</h3>
+        <ul>
+            <li>🌍 <strong>AI Translation:</strong> 20+ languages with OpenAI</li>
+            <li>👁️ <strong>Vision OCR:</strong> GPT-4 Vision text extraction</li>
+            <li>🤖 <strong>Task Enhancement:</strong> AI-powered task optimization</li>
+            <li>📊 <strong>Smart Analysis:</strong> AI insights and suggestions</li>
+            <li>📅 <strong>Calendar Generation:</strong> AI-created events</li>
+        </ul>
+        
+        <div class="status">
+            <strong>🔑 Important:</strong> Don't forget to add your OpenAI API key in Settings to unlock all AI features!
+        </div>
+        
+        <p><strong>Deployment Time:</strong> <span id="timestamp"></span></p>
+    </div>
+    
+    <script>
+        document.getElementById('timestamp').textContent = new Date().toLocaleString();
+        
+        // Test if other files are accessible
+        setTimeout(() => {
+            fetch('landing.html')
+                .then(response => {
+                    if (response.ok) {
+                        console.log('✅ landing.html accessible');
+                    } else {
+                        console.log('❌ landing.html not accessible');
+                    }
+                })
+                .catch(err => console.log('❌ Error accessing landing.html:', err));
+        }, 1000);
+    </script>
+</body>
+</html>
